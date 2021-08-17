@@ -2,8 +2,8 @@
 
 abstract class Product 
 {
-    public $price;
-    public $quantity;
+    private $price;
+    private $quantity;
 
     abstract public function calcPrice();
     
@@ -13,6 +13,14 @@ abstract class Product
         $this->price = $price;
         $this->quantity = $quantity;
     }
+
+    public function getPrice(){
+        return $this->price;
+    }
+
+    public function getQuantity(){
+        return $this->quantity;
+    }
 };
 
 
@@ -20,11 +28,11 @@ class RealProduct extends Product
 {
     public function calcPrice() : float
     {
-        return $this->price;
+        return $this->getPrice();
     }
     public function calcTotalSales() : float
     {
-        return ($this->calcPrice() * $this->quantity);
+        return ($this->calcPrice() * $this->getQuantity());
     }
 };
 
@@ -36,11 +44,11 @@ class DigitalProduct extends Product
 {
     public function calcPrice() : float
     {
-        return ($this->price / 2);
+        return ($this->getPrice() / 2);
     }
     public function calcTotalSales() : float
     {
-        return ($this->calcPrice() * $this->quantity);
+        return ($this->calcPrice() * $this->getQuantity());
     }
 };
 
@@ -59,12 +67,12 @@ class WeightProduct extends Product
 
     public function calcPrice() : float
     {
-        return ($this->price * $this->weight);
+        return ($this->getPrice() * $this->weight);
     }
     
     public function calcTotalSales() : float
     {
-        return ($this->calcPrice() * $this->quantity);
+        return ($this->calcPrice() * $this->getQuantity());
     }
 };
 
